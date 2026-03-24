@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import Post from '../model/Post.js';
+import Post from '../models/Post.js';
 
 router.post('/', async (req, res) => {
    
@@ -30,3 +30,5 @@ router.get('/', async (req, res) => {
     res.status(400).json({ message: err.message })
   }
 })
+
+export default router
