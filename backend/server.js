@@ -5,10 +5,12 @@ import userRoutes from './routes/userRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 
 const app = express()
+import cors from 'cors'
 
 const port = process.env.PORT || 3000
 
 app.use(express.json())
+app.use(cors())
 
 app.use('/api/posts', postRoutes)
 app.use('/api/users', userRoutes)
