@@ -64,10 +64,16 @@ router.post ('/login', async (req,res) => {
     }
     // create a token
 
+    const payload = { 
+            username: user.username,  
+            email: user.email,
+            _id: user._id
+        }
+
     const token = jwt.sign({ data: payload }, secret, { expiresIn: expiration })
 
     res.status(200).json({ token, user })
-    console.log('login successful')
+    console.log('login successful', user)
 
   } catch (err) {
 

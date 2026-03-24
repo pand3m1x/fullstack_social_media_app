@@ -11,8 +11,11 @@ router.post('/', async (req, res) => {
    
   try{
 
-    const posts = await Post.create(req.body)
-    res.status(200).json(Post)
+    const post = await Post.create({
+            ...req.body,
+            author: req.user._id
+        })
+    res.status(200).json(post)
 
   } catch(err) {
 
@@ -20,6 +23,8 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.message })
 
   }
+
+  console.log('post successful', post )
 
 })
 router.get('/', async (req, res) => {

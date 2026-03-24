@@ -2,10 +2,10 @@ import jwt from 'jsonwebtoken'
 
 const secret = process.env.JWT_SECRET
 
-export async function authMiddleware(req,res,next) {
-
+export async function authMiddleware( req, res, next ) {
+console.log("HEADERS:", req.headers);
   try{
-    
+
   let token = req.headers.authorization
 
   // check if there is a token
@@ -24,7 +24,7 @@ export async function authMiddleware(req,res,next) {
 
   // move onto the route
   next()
-
+  
 } catch(err) {
 
   console.log(err.message)
