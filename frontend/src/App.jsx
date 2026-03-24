@@ -9,11 +9,14 @@ import Navbar from "./components/Navbar";
 // import Navbar from "./components/Navbar";
 
 function App(){
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await fetch('http://localhost:3000/api/protected',}
-  //     const data = await {
-  // }, [])
+  useEffect(() => {
+    // async function getData() {
+    //   const response = await fetch('http://localhost:3000/api/posts')
+    //   const data = await response.json()
+    //   console.log(data)
+    // }
+    // getData()
+  }, [])
 
   return(
     <>
@@ -26,3 +29,5 @@ function App(){
     </>
   )
 }
+
+export default App;
