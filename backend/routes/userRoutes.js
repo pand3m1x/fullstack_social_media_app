@@ -1,5 +1,6 @@
 import express from 'express';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ try {
    }
 
   // create a token
-  const token = jwt.sign({ data: payload }, secret, { expiredIn: expiration })
+  const token = jwt.sign({ data: payload }, secret, { expiresIn: expiration })
 
   res.status(201).json({ token, user })
 
@@ -40,7 +41,7 @@ try {
     res.status(400).json({ message: err.message })
 
   }
-
+console.log('register successful')  
 });
 
 router.post ('/login', async (req,res) => {
@@ -63,9 +64,10 @@ router.post ('/login', async (req,res) => {
     }
     // create a token
 
-    const token = jwt.sign({ data: payload }, secret, { expiredIn: expiration })
+    const token = jwt.sign({ data: payload }, secret, { expiresIn: expiration })
 
     res.status(200).json({ token, user })
+    console.log('login successful')
 
   } catch (err) {
 
