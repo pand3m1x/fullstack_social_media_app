@@ -5,6 +5,9 @@ const router = express.Router();
 
 import User from '../models/User.js';
 
+const secret = process.env.JWT_SECRET
+const expiration = '24h'
+
 router.post('/register',  async (req, res) => {
 
 try {
@@ -20,10 +23,21 @@ try {
 
   });
 
+  const payload = { 
+    username: user.username,
+    email: user.email,
+    _id: user._id
+   }
+
   // create a token
+  const token = jwt.sign({ data: payload }, secret, { expiredIn: expiration })
+
+  res.status(201).json({ token, user })
+
 } catch(err) {
 
-  console.log(err)
+  console.log(err.message)
+  res.status(400).json({ message: err.message })
 
 }
 
