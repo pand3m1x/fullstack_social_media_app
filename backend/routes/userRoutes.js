@@ -34,11 +34,46 @@ try {
 
   res.status(201).json({ token, user })
 
-} catch(err) {
+  } catch(err) {
 
-  console.log(err.message)
-  res.status(400).json({ message: err.message })
+    console.log(err.message)
+    res.status(400).json({ message: err.message })
 
-}
+  }
 
 });
+
+router.post ('/login', async (req,res) => {
+
+  try {
+
+    // find the user
+    const user = await User.findOne({ email: req.body.email })
+    
+    // check if the user exists
+    if (!user) {
+      return res.status(400).json({ message: 'incorrect email or password' })
+    }
+
+    // check the password
+    const correctPassword = bcrypt.compare(req.body.password, user.password)
+
+    if (!correctPassword) {
+      return res.status(400).json({ message: 'Incorrect email or password' })
+    }
+    // create a token
+
+    const token = jwt.sign({ data: payload }, secret, { expiredIn: expiration })
+
+    res.status(200).json({ token, user })
+
+  } catch (err) {
+
+    console.log(err.message)
+    res.status(400).json({ message: err.message })
+
+  }
+
+})
+
+export default router
