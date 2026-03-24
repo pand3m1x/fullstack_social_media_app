@@ -4,6 +4,9 @@ const router = express.Router();
 
 import Post from '../models/Post.js';
 
+import { authMiddleware } from '../utils/auth.js'
+
+router.use( authMiddleware )
 router.post('/', async (req, res) => {
    
   try{
