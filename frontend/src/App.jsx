@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Feed from './pages/Feed'
 
 import Navbar from './components/Navbar'
+
 function App(){
 
   return(

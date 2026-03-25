@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { userClient } from "../clients/api"
 
 function Register() {
 
@@ -15,17 +16,32 @@ function Register() {
       })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault()
     console.log(formData)
 
     // send the form data to our backend
+    try {
 
-    // take the token and store it locally
+      const { data } = await userClient.post('/register', formData) // response.data also works: where the Response has other properties (like the HTTP code, error information etc)
+      console.log(data)
 
-    // save some user data in our state
+      // take the token and store it locally
+  
+        localStorage.setItem("token", data.token) //or response.data.token
+        
+      // save some user data in our state
+  
+        
+      // take the user to a different page
 
-    // take the user to a different page
+    } catch (err) {
+
+        console.log(err)
+        alert(err.message)
+
+    }
   }
 
   return(
@@ -36,13 +52,13 @@ function Register() {
         <label htmlFor="username">Username</label>
         <input value={formData.username} onChange={handleChange} type="text" id="username" name="username" required/>
 
-        <label htmlFor="email">Email</label>
+        <br/><label htmlFor="email">Email</label>
         <input value={formData.email} onChange={handleChange} type="email" id="email" name="email" required />
         
-        <label htmlFor="password">Password</label>
+        <br/><label htmlFor="password">Password</label>
         <input value={formData.password} onChange={handleChange} type="password" id="password" name="password" required />
         
-        <button type="submit">Register</button>
+        <br/><button type="submit">Register</button>
 
       </form>
     </div>
