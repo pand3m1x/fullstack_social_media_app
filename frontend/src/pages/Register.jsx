@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { userClient } from "../clients/api"
+import { useUser } from "../context/UserContext"
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+
+  const { setUser } = useUser()
+
+  const navigate = useNavigate()
+  // const value = useUser()
+  // console.log (value)
 
   const [formData, setFormData] = useState({
     username: '',
@@ -33,8 +41,11 @@ function Register() {
         
       // save some user data in our state
   
+      setUser(data.user)
         
       // take the user to a different page
+
+      navigate("/feed")
 
     } catch (err) {
 
