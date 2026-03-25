@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -22,7 +22,7 @@ function App(){
       {user ? 
       <Routes>
         <Route path="/feed" element={<Feed />}/>
-        <Route path="*" element={<Navigate to="/feed"/>}/>
+        <Route path="*" element={<Navigate to="/feed" />} />
       </Routes>
         :
       <Routes>

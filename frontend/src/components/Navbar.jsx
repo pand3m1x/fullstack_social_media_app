@@ -5,7 +5,7 @@ function Navbar() {
 
     // bring in user info from context
 
-    const { user } = useUser()
+    const { user, logout } = useUser()
 
     return (
         <nav>
