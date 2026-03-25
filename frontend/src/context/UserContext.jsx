@@ -1,5 +1,6 @@
 // import { children } from "react";
 import { createContext, useContext, useState  } from "react";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext(null)
 
@@ -7,6 +8,7 @@ const UserContext = createContext(null)
 function UserProvider({ children }) {
 
   const [ user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   const logout = () => {
 
@@ -18,7 +20,7 @@ function UserProvider({ children }) {
     localStorage.removeItem("token")
 
     // navigate the user to login
-    Navigate("/login")
+    navigate("/login")
   }
   
   const value = {
