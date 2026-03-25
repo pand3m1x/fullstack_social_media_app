@@ -7,16 +7,30 @@ import Feed from './pages/Feed'
 
 import Navbar from './components/Navbar'
 
+import { useUser } from './context/UserContext'
+
 function App(){
+
+  // bring in user info
+  const { user } = useUser()
+  console.log(user)
 
   return(
     <>
       <Navbar />
+
+      {user ? 
+      <Routes>
+        <Route path="/feed" element={<Feed />}/>
+        <Route path="*" element={<Navigate to="/feed"/>}/>
+      </Routes>
+        :
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/feed" element={<Feed />} />
       </Routes>
+       }
     </>
   )
 }

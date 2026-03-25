@@ -7,6 +7,19 @@ const UserContext = createContext(null)
 function UserProvider({ children }) {
 
   const [ user, setUser] = useState(null)
+
+  const logout = () => {
+
+    // clear the user state
+
+    setUser(null)
+
+    // clear the local storage
+    localStorage.removeItem("token")
+
+    // navigate the user to login
+    Navigate("/login")
+  }
   
   const value = {
 
