@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 const router = express.Router();
 
 import User from '../models/User.js';
+import { authMiddleware } from '../utils/auth.js'
 
 const secret = process.env.JWT_SECRET
 const expiration = '24h'
@@ -84,4 +85,12 @@ router.post ('/login', async (req,res) => {
 
 })
 
+// verify logged in User token
+router.use(authMiddleware)
+
+// after verification send back user details (payload)
+router.get('/', (req, res) => {
+ res.status(200).json(req.user)
+
+})
 export default router
