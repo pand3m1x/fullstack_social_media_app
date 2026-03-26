@@ -32,9 +32,31 @@ function Feed() {
     getData()
   }, [])
 
+  const handleSubmit = async (e) => {
+
+    e.preventDefault()
+    
+    try{
+
+    // make a POST request
+    const { data } = await postClient.post('/', { title,body })
+    console.log(data)
+    // add the new post to our State
+    setPosts([ data, ...posts ])
+
+    // reset the form
+    setTitle('')
+    setBody('')
+
+    } catch(err) {
+
+    console.log(err)
+
+    }
+  }
   return(
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>Make a post!</h2>
         <label htmlFor="title">Title:</label>
         <input type="text"
@@ -49,6 +71,7 @@ function Feed() {
         value={body}
         onChange={(e) => setBody(e.target.value)} 
         required />
+        <br/><button>Submit</button>
       </form>
       <h1>Feed</h1>
       {posts.map(post => <Post key={post._id} post={post} />)}
