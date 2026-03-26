@@ -5,6 +5,7 @@ function Post ({ post }) {
   return (
   <div>
     <h3>{post.title}</h3>
+    <h4>author: {post.author.username}</h4>
     <div>{date.toLocaleDateString()} {date.toLocaleDateString()}</div>
     <p>{post.body}</p>
   </div>

@@ -9,6 +9,7 @@ function Feed() {
 
     const [ title,setTitle ] = useState('')
     const [ body,setBody ] = useState('')
+    const [ user,setUser ] = useState('')
 
   useEffect(() => {
 
@@ -54,6 +55,7 @@ function Feed() {
 
     }
   }
+  
   return(
     <div>
       <form onSubmit={handleSubmit}>
