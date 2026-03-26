@@ -1,10 +1,14 @@
 import axios from 'axios'
 
 
+export const token = () => localStorage.getItem("token")
+
 export const userClient = axios.create({
   
-  baseURL: 'http://localhost:3000/api/users'
-  
+  baseURL: 'http://localhost:3000/api/users',
+   headers: {
+        Authorization: `Bearer ${token()}`
+      }  
 })
 
 export const postClient = axios.create({
@@ -14,9 +18,8 @@ export const postClient = axios.create({
 
 postClient.interceptors.request.use((req) => {
   
-  const token = localStorage.getItem('token')
-  if (token) {
-    req.headers.Authorization = `Bearer ${token}`
+  if (token()) {
+    req.headers.Authorization = `Bearer ${token()}`
   }
   return req
 })
