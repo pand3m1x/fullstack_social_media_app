@@ -16,6 +16,7 @@ router.post('/', async (req, res) => {
             author: req.user._id
         })
     res.status(200).json(post)
+    console.log('post successful', post )
 
   } catch(err) {
 
@@ -24,13 +25,16 @@ router.post('/', async (req, res) => {
 
   }
 
-  console.log('post successful', post )
 
 })
 router.get('/', async (req, res) => {
 
   try{
     const posts = await Post.find({})
+                            .sort({ createdAt: -1 })
+                            // turn the author (which is an id) into the user document for that author/id
+                            // the second argument 'username' is the field in the user document we want to keep
+                            .populate('author', 'username')
     res.status(200).json(posts)
 
   } catch(err) {
