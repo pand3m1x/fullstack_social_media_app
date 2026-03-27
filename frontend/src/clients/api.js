@@ -1,21 +1,26 @@
 import axios from 'axios'
 
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+console.log(BASE_URL)
+
 export const token = () => localStorage.getItem("token")
 
 export const userClient = axios.create({
   
-  baseURL: 'http://localhost:3000/api/users',
+  baseURL:  BASE_URL + '/api/users', // Or +
    headers: {
         Authorization: `Bearer ${token()}`
       }  
 })
 
 export const postClient = axios.create({
-  baseURL: 'http://localhost:3000/api/posts'
+
+  baseURL: `${BASE_URL}/api/posts` //temperate literal
   
 })
 
+// use the latest version of the token in local storage
 postClient.interceptors.request.use((req) => {
   
   if (token()) {
